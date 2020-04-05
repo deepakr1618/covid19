@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import EachCountry from './components/each-country/each-country.component'
+import CountryList from './components/country-list/country-list.component'
+import Header from './components/header/header.component'
+import Api from './components/apis/apis.component'
+import {Switch , Route } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      countryList : []
+    }
+  }
+  componentDidMount(){
+    fetch("https://api.covid19api.com/countries")
+    .then(res=>res.json())
+    .then(data=>{
+      this.setState({countryList:data})
+    })
+  }
+  render(){
+    return (
+      <div className="coutainer-list-container">
+      <Header></Header>
+      <Switch>
+        <Route exact path="/" component={(props)=>{
+          return(<CountryList countryList={this.state.countryList}></CountryList>)
+        }}/>
+
+        <Route exact path="/:country/:status" render={(props)=>{return (<EachCountry></EachCountry>)}}/>
+        <Route exact path="/api" component={Api}></Route>
+      </Switch> 
+      </div>
+      
+    )
+  }
 }
 
 export default App;

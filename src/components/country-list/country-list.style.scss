@@ -1,0 +1,118 @@
+$cell-color : rgb(233, 233, 233);
+$black-color : #333;
+$screen-change-size: 925px;
+
+@mixin hoverLabel {
+    top:-6px;
+    background:$black-color;
+    color:$cell-color;
+    font-size:13px;
+    padding:1px 7px;
+    left: 5px;
+    border-radius: 99px;
+}
+
+.container-wrapper{
+  margin:0px auto;
+  width:95vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  h1{
+    margin: 45px auto;
+    &:before{
+      position: absolute;
+      content:'';
+      width:155px;
+      height:8px;
+      background:rgb(250, 87, 87);
+      margin-top: 45px;
+      transition: 0.4s all ease;
+    }
+    
+    &:hover{
+      &:before{
+        width:250px;
+      }
+    }
+  }
+  .overlay{
+    width:100%;
+    height: 100vh;
+    box-sizing: border-box;
+    position: fixed;
+    top:0px;
+    left:0px;
+    background:rgba(0, 0, 0, 0.753);
+    z-index: -1;
+    opacity: 0;
+    transition: 0.4s opacity ease;
+    &.opened{
+      opacity: 1;
+      z-index: 2;
+
+    }
+  }
+
+
+
+  .input_wrapper{
+    position: relative;
+    margin:20px auto;
+    width:40%;
+    height: 55px;
+    z-index: 1;
+    input[type="text"]{
+      width:100%;
+      padding: 10px 10px 10px 10px;
+      height: 90%;
+      border:2px solid $black-color;
+      font-size:17px;
+      &:focus{
+        outline:none;
+      }
+      &:focus{
+        padding: 15px 10px 10px 10px;
+        &+label{
+          @include hoverLabel()
+        }
+      }
+    }
+    label{
+      position: absolute;
+      left:15px;
+      top:12px;
+      font-size:17px;
+      transition: 0.4s all ease;
+    }
+  }
+
+  .coutainer-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 15px;
+    column-gap: 15px;
+    
+    @media screen and (max-width:$screen-change-size){
+      grid-template-columns: 1fr;
+    }
+
+  }
+
+
+  @media screen and (max-width:$screen-change-size){
+    h1{
+      &:before{
+        margin-top: 75px;
+      }
+      
+      &:hover{
+        &:before{
+          width:250px;
+        }
+      }
+    }
+  }
+}

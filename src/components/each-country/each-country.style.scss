@@ -1,0 +1,72 @@
+
+$screen-change-size: 925px;
+
+.each-country{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+    .status{
+        text-transform: uppercase;
+        font-size:28px;
+        margin:25px;
+        font-weight: bold;
+    }
+
+    .option{
+        padding:10px 25px;
+        margin:10px 0px;
+        border:2px solid #333;
+    }
+
+    .main-container{
+        width:90%;
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+        .graph-container{
+            width: 60%;
+            padding:50px 20px;
+        }
+        .data-container{
+            width: 40%;
+            height:60vh;
+            overflow-y: scroll;
+            table{
+                width:100%;
+                td{
+                    padding: 2px 5px;
+                }
+                tr{
+                    
+                }
+            }
+            /* width */
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+            
+            /* Track */
+            &::-webkit-scrollbar-track {
+                border-radius: 10px;
+                background: rgb(218, 218, 218);
+            }
+            
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: rgb(37, 37, 37);
+                border-radius: 10px;
+            }
+        }
+        @media screen and (max-width:$screen-change-size){
+            flex-direction: column;
+            .graph-container,.data-container{
+                width:100%;
+            }
+            .graph-container{
+                height:auto;
+            }
+        }
+    }
+    
+}
